@@ -30,6 +30,7 @@
   }
   
   // Q4. make new array without the first two elements
+  //배열에서 원하는 부분만 짤라서 저장하기 
   {
     const array = [1, 2, 3, 4, 5];
     const result  = array.slice(2);
@@ -56,6 +57,8 @@
   ];
   
   // Q5. find a student with the score 90
+  //  find() 이용하기  찾으면  true  , 없으면 undefined 
+  // 
   {
      for(let student of students){
          if(student.score === 90){
@@ -68,6 +71,7 @@
   }
   
   // Q6. make an array of enrolled students
+  //원한는 값만 검색해서 이 콜백 함수가 true 만 검색해서 사용 
     {
     
         const result = students.filter((student) => student.enrolled === true);
@@ -77,7 +81,9 @@
     }
   
   // Q7. make an array containing only the students' scores
-  // result should be: [45, 80, 90, 66, 88]
+  // result should be: [45, 80, 90, 66, 88]]
+// 학생들의 배열에서 점수만 뽑아서 새로운 배열 만들기 
+//배열안의 요소로 원하는 방식으로 다른 방식을 만들 떄 사용 
 
   {
     const result = students.map((student) => student.score); //배열안의 모든 값들을 우리가 원하는 다른 방식의 데이터로 만들고 싶을 때 사용 
@@ -103,6 +109,9 @@
   }
   
   // Q9. compute students' average score
+  // reduse()  : 배열의있는 모든 요소의 값들을 모아놓을 때 사용 
+  // 얘는 다시 검색해보자 
+
   {
     //   let average = 0;
 
