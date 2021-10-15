@@ -19,6 +19,7 @@ function solution(board){
                       while(true){
                           x=x+dx[k];
                           y=y+dy[k];
+                          console.log(`x:${x},y:${y}`);
                           if(pan[x][y]===pan[i][j]) cnt++; // 같은 색의 돌이라면 카운트!!
                           else break;
                       }
@@ -32,62 +33,61 @@ function solution(board){
       }
   }
   return answer;
-}
 
+}
 
 function solution2(board){
 
-  let dx = [-1, 0 , 1 ,0 ];
-  let dy = [ 0, -1, 0, 1 ];
+  let answer = 0;
+  let pan=Array.from(Array(21), ()=>Array(21).fill(0));  
 
-  let cnt = 0;
+ for( let i = 1 ; i <=19; i++){
+   for(let j = 1; j <=19 ; j++){
+    pan[i][j] = board[i-1][j-1];
+   }
+ }
 
-  let pan = Array.from(Array(21), ()=>Array(21).fill(0)); 
+  let dx = [-1, 0, 1, 1];
+  let dy = [ 1, 1, 1, 0];
 
-  for(let i = 1 ; i < board.legth ; i++ ){
-    for(let j = 1 ; j <board.legth ; j++){
+  // let dx=[-1, 0, 1, 1];
+  // let dy=[1, 1, 1, 0];
 
-      pan[i][j] = board[i-1][j-1]; 
+  for( let i = 1; i <=19; i++){
+    for( let j =1; j <=19; j++){
+      if(pan[i][j]!==0){
+        for( let k = 0; k < 4; k++){
 
-    }
-  }
-
-  console.log(pan);
-
-  for(let i = 1; i <= 19; i++){
-    for(let j = 1; j <=19; j++){
-      if(pan[i][j] !==0){
-        for(let k = 0; k < 4; k++){
-          cnt = 1;
-          let x = i; // 움직이기 위한 변수를 따로 선언해준다 
-          let y = j; 
-
-          if(pan[i-dx[k]][j-dx[k]]!==0){
+          let nx = i;
+          let ny = j; 
+          let cnt = 1;
+          //console.log(`x:${nx},y:${ny}`);
+          // i 와 j의 값을 직접적으로 바꿔서는 안된다 기준이기 때문에 그래서 방향 탐색 용으로 nx, ny을 선언 
+          if(pan[i-dx[k]][j-dy[k]] !== pan[i][j]){
+            
             while(true){
-              x = x + dx[k];
-              y = y + dy[k];
-              
-              if(pan[x][y] === pan[i][j]){
+                nx = nx + dx[k] ;
+                ny = ny + dy[k] ;
+              console.log(`x:${nx},y:${ny}`);
+              if(pan[nx][ny] === pan[i][j] ){
                 cnt++;
-                break;
               }
+              else break;
             }
-            if(cnt === 5){
-              answer = pan[i][j];
-              return answer;
-            }
-
           }
-
+          if(cnt===5){
+            answer = pan[i][j];
+            return answer;
+          }
         }
-
-      }
-
-      
     }
   }
+  }
 
+  return answer;
 }
+
+
 
 console.log(solution2([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -97,7 +97,7 @@ console.log(solution2([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   [0, 0, 0, 0, 1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  
   [0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  
   [0, 0, 0, 0, 0, 0, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  
-  [0, 0, 0, 0s, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
@@ -108,3 +108,4 @@ console.log(solution2([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])); 
+
