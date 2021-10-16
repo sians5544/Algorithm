@@ -56,5 +56,3 @@ console.log(solution(1));
   return answer;
  }
  console.log(solution(1));
-
-
