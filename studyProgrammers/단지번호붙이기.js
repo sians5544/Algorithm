@@ -1,64 +1,40 @@
+function solution(len,map){
 
-
-
-
-function solution1(n,nums){
-
-  let dx = [-1,0,1,0];
-  let dy = [0,-1,0,1];
-
-  let answer = []; // 단지 수를 출력하기 위한 배열 
+  let answer = [];
   let cnt = 0;
 
-  for(let i = 0; i < nums.length; i++){
-    for(let j = 0 ; j < nums.length; j++){
-      let flag = true;
-      for(let k = 0 ; k < 4; k++){
+  let dx = [-1 ,0 ,1,0];
+  let dy = [ 0, 1, 0,-1]; 
 
-        let nx = i + dx[k];
-        let ny = j + dy[k];
+  function DFS(x,y){
+    
+    for(let k = 0; k <4; k++){
+      let nx = x + dx[k]; 
+      let ny = y + dy[k];
 
-        if(nx <=0 && ny <=0 && nx >=n && ny >=n && nums[i][j] === 0 ){
-          flag = false;
-          break;
-        }
 
-        if(flag){
-          cnt ++;
-        }
+
+      if(nx>=0 && ny>=0 && nx < len &&  ny < len && map[nx][ny]===1){
+        map[nx][ny] = 0;
+        cnt++;
+        DFS(nx,ny);
+      }
+  }
+}
+
+  for(let i = 0; i<len;i++){
+    for(let j = 0; j<len;j++){
+      if(map[i][j]===1){
+        DFS(i,j);
+        answer.push(cnt);
+        cnt = 0;
       }
     }
   }
-}
 
-function solution(land) {
-  let answer = 0,max = 0;
-  let number;
-  
-  for(let i = 0; i < land.length; i++){
-      
-      for( let j = 0 ; j< 4 ; j++){
-
-        if(max < land[i][j] && (number!==j && i !== 0)) {
-          max = land[i][j];
-          console.log(max);
-          number= j ; 
-        }
-        
-      }
-      answer+= max;
-  }
+  answer.unshift(answer.length);
+  answer.sort((a,b) => a-b);
   return answer;
 }
 
-
-
-function solution2(land){
-  let answer = 0;
-
-  for ( let i = 1 ; i < land.length ; i++){
-
-    land[i][0]
-  }
-}
-console.log(solution([[1,2,3,5],[5,6,7,8],[4,3,2,1]]));
+console.log(solution(7,[[0,1,1,0,1,0,0],[0,1,1,0,1,0,1],[1,1,1,0,1,0,1],[0,0,0,0,1,1,1],[0,1,0,0,0,0,0],[0,1,1,1,1,1,0],[0,1,1,1,0,0,0]]));
