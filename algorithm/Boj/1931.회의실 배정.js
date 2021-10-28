@@ -39,4 +39,4 @@ function solution(n,nums){
 }
 
 
-console.log(solution(n,nums));
+console.log(n,nums);
