@@ -1,33 +1,40 @@
-function solution(asteroids) {
+var asteroidCollision = function(asteroids) {
     
-  let answer = 0;
   let stack = [];
-
-  if(asteroids[asteroids.length-1] < 0){
-      for(let a of asteroids){
-          if(a>0){
-              stack.push(a);
-          }
-          else{
-            console.log(a);
-              let last = stack[stack.length-1];
-
-              if( Math.abs(a) > Math.abs(last)){
-                  stack.pop();
-                  stack.push(a);
-              }
-              else if( Math.abs(a) === Math.abs(last)){
-                  stack.pop();
-                  continue;
-              }
-              
-            console.log(stack);
-          }
-      }
-  }
-  else return asteroids;
   
-  return stack;
+  for(let x of asteroids){
+      if(x > 0) stack.push(x);
+      else{
+          let top = stack[stack.length-1] ;
+          while(top >0 && Math.abs(stack[stack.length-1]) < Math.abs(x)  && stack.length){
+                stack.pop();
+                top = stack[stack.length-1];
+          }
+          
+          if (x + top === 0) stack.pop();
+          else if (!stack.length || top < 0) stack.push(x);
+          }       
+  }
+  
+  return stack; 
 };
 
-console.log(solution([5,10,-5]));
+function solution(asteroids) {
+  let stack = [];
+
+  for (const x of asteroids) {
+    let top = stack[stack.length - 1];
+    if (!stack.length || x > 0 || (x < 0 && top < 0)) stack.push(x);
+    else {
+      while (stack.length && top > 0 && Math.abs(top) < Math.abs(x)) {
+        stack.pop();
+        top = stack[stack.length - 1];
+      }
+      if (x + top === 0) stack.pop();
+      else if (!stack.length || top < 0) stack.push(x);
+    }
+  }
+  return stack;
+}
+
+console.log(solution([1, -2, -2, -2]));
