@@ -36,9 +36,6 @@ function solution(n,nums){
     else return a[0]-b[0];
   }); // 정렬 기준을 두개로 잡으려면 하나로 먼저 정렬한 후에 다른 한가지 조건으로 정렬을 해준다 
 
-
-  console.log(nums);
-
   for(let x of nums){
     for(let i = 0; i<n; i++){
       if(check[i] <= x[0]){

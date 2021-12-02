@@ -11,23 +11,16 @@ var minAddToMakeValid = function(s) {
   for(let i = 0; i < s.length; i++){
       
       if(s[i] !== '(' && stack.length){
-      
           stack.pop();
       }
       else if(s[i] === ')' && stack.length ==0){
-          
           answer++;
       }
       else{
-          
           stack.push(s[i]);
       }
-      
   }
-  
-  
-  answer+= stack.length;
-  
+
+  answer+= stack.length;  
   return answer;
-  
 };

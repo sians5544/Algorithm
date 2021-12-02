@@ -15,30 +15,74 @@
 
 // 이 노래들을 다 밤아내려면 몇장이 필요할까? 
 // m보다 작거나 같을 때 
- 
-function solution(songs ,capacity){
-  
-  let left = Math.max(...songs);
-  let right = 1e10;
+
+// function solution(songs ,capacity){
+
+//   let left = Math.max(...songs);
+//   let right = 1e10;
 
 
-  function count(mid){
-    let cnt = 1; // 어차피 한장은 사용하기 때문에 1로 초기화 
+//   function count(mid){
+//     let cnt = 1; // 어차피 한장은 사용하기 때문에 1로 초기화 
+//     let sum = 0;
+
+//     for(let x of songs){
+//       if(sum+x>capacity){ // 더해보고 용량보다 크면 새로운 한장이 필요하다 
+//         cnt++;
+//         sum = x; // 이 곡은 새로운 장에 들어간 것 
+//       }
+//       else{
+//         sum+=x;
+//       }
+//     }
+//     return cnt;
+//   }
+
+//   while(left <= right){
+//     if(mid > )
+//   }
+// }
+
+// DVD 의 용량을 mid 값의 기준으로 잡는다 
+function solution(songs, m) {
+  let answer = 0;
+  let left = 0;
+  let right = 1e7;
+
+
+  function count(mid) {
+
+    let count = 1;
     let sum = 0;
 
-    for(let x of songs){
-      if(sum+x>capacity){ // 더해보고 용량보다 크면 새로운 한장이 필요하다 
-        cnt++;
-        sum = x; // 이 곡은 새로운 장에 들어간 것 
+    for (let i = 0; i < songs.length; i++) {
+      if (sum + songs[i] > mid) {
+        count++;
+        sum = songs[i];
       }
-      else{
-        sum+=x;
+      else {
+        sum += songs[i];
       }
     }
-    return cnt;
+
+    return count;
   }
 
-  while(left <= right){
-    if(mid > )
+  while (left <= right) {
+
+    let mid = parseInt((left + right) / 2);
+
+    if (count(mid) <= m) {
+      answer = mid;
+      right = mid - 1;
+    }
+    else {
+      left = mid + 1;
+    }
   }
+
+
+  return answer;
 }
+
+console.log(solution([1, 2, 3, 4, 5, 6, 7, 8, 9], 3));

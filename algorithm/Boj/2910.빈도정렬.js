@@ -10,14 +10,8 @@
 
 // 빈도 정렬은 두수 X 와 Y가 있을 때 , X가 Y보다 수열에서 많이 등장하는 경우에는 
 // X 가 Y보다 앞에 있어야한다 
-//  등장하는 횟수가 같다면 먼저 나온것이 앞에 있어야함 
+//  등장하는 횟수가 같다면 먼저 나온것이 앞에 있어야함 그렇기 때문에 hash의 값은 [count , index] 값이어야함
 
-
-// 숫자 왔던 배열 선언해서 쭉 돌면서 체크배열을 한
-// 제일 처음 나왔던 인덱스를 저장해주고 그 순서를 비교하라 
-
-
-// sort 가 했을 때 
 const fs = require('fs');
 const filePath =process.platform === 'linux' ? '/dev/stdin' : './input.txt';
 let input = fs.readFileSync(filePath).toString().trim().split('\n');
@@ -36,36 +30,37 @@ function solution(n,c,nums){
 
   let hash = new Map();
 
-  let check = Array(n);
-
   for(let right = 0; right < n; right++){
-    
     //[count,index]
-    //해쉬에 없다면 , hash에 넣어주면서 [nums[right] , index]
+    
     if(hash.has(nums[right])){
-      //카운트만 증가 
+      //이미 해쉬에 있다면 카운트만 증가시키면 된다  
       let [cnt,index] = hash.get(nums[right]);
       hash.set(nums[right],[cnt+1,index]);
     }
     else{
+      //해쉬에 없다면 , hash에 넣어주면서 배열의 값과 인덱스를 추가한다 [nums[right] , index] 
       hash.set(nums[right],[1,right]);
     }
-
   }
 
-
+  // 정렬
+  // 등장하는 횟수가 같다면 인덱스 값이 작은 것으로 오름차순 정렬
+  // 등장횟수가 큰 값으로 내림차순 정렬
   let result=[...hash].sort((a, b) => { 
     if(a[1][0] === b[1][0]) return a[1][1]-b[1][1];
     else return b[1][0]-a[1][0];
   });
 
-  console.log(result);
 
+  // value 을 카운트 만큼 answer 배열에 추가
   for(let [key,[value,index]] of result){
     for(let i = 0; i<value; i++){
       answer.push(key);
     }
   }
+  
+  //출력 값이 배열의 형태가 아니므로 join처리 
   return answer.join(" ");
 }
 

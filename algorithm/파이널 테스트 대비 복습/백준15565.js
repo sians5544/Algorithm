@@ -44,6 +44,7 @@ let k = parseInt(input[0].split(" ")[1]);
 
 let tmp = input[1].split(" ");
 let nums = Array(n);
+
 for (let i = 0; i < n; i++) {
   nums[i] = parseInt(tmp[i]);
 }
@@ -54,7 +55,7 @@ function solution(n, k , nums){
 
   let left  = 0, cnt  = 0;
 
-  for(let right = 0; right< n ;  right++){
+  for(let right = 0; right< n;right++){
 
     if(nums[right] === 1) cnt ++;
 

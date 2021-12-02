@@ -1,8 +1,4 @@
-/**
- * @param {number[]} costs
- * @param {number} coins
- * @return {number}
- */
+
 var maxIceCream = function (costs, coins) {
   let left = 0,
     answer = 0,

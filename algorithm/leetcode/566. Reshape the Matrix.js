@@ -17,4 +17,4 @@ function solution(mat, r, c) {
 }
 
 console.log(solution([[1, 2], [3, 4]], 1, 4));
-console.log(solution([[1, 2], [3, 4]], 2, 4));
+console.log(solution([[1, 2], [3, 4]], 2, 4));5

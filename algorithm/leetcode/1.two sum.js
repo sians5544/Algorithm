@@ -22,3 +22,4 @@ console.log(solution([3, 2, 4], 6));
 console.log(solution([3, 2, 3], 6));
 console.log(solution([-1, -2, -3, -4, -5], -8));
 
+Number.MIN_SAFE_INTEGER

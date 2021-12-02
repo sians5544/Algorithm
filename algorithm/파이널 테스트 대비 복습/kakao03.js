@@ -66,3 +66,37 @@ console.log(
   )
 );
 console.log(solution([1, 461, 1, 10], ['00:00 1234 IN']));
+
+function solution(fees, records) {
+  const FINISH_TIME = 23 * 60 + 59;
+
+  let in_dict = new Map(),
+    out_dict = new Map();
+
+  let [org_time, org_fee, add_time, add_fee] = fees;
+
+  for (let record of records) {
+    let [time, car, check] = record.split(' ');
+    let delay = +time.split(':')[0] * 60 + +time.split(':')[1];
+    if (check === 'IN') in_dict.set(car, delay);
+    else {
+      let in_time = in_dict.get(car);
+      in_dict.delete(car);
+      let p_time = delay - in_time;
+      if (out_dict.get(car)) out_dict.set(car, out_dict.get(car) + p_time);
+      else out_dict.set(car, p_time);
+    }
+  }
+
+  for (let [i, t] of in_dict.entries()) {
+    if (out_dict.get(i)) out_dict.set(i, out_dict.get(i) + FINISH_TIME - t);
+    else out_dict.set(i, FINISH_TIME - t);
+  }
+
+  for (let [i, t] of out_dict.entries()) {
+    if (t <= org_time) out_dict.set(i, org_fee);
+    else out_dict.set(i, org_fee + Math.ceil((t - org_time) / add_time) * add_fee);
+  }
+
+  return [...out_dict].sort().map((a) => a[1]);
+}

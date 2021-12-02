@@ -27,19 +27,19 @@ function solution(n,m,nums){
 
   let answer = 0, sum=0, left=0;
 
-  nums.sort((a,b) => a-b);
+  nums.sort((a,b) => a-b); // 오름차순으로 정렬
 
   let right = n-1;
 
   while(left< right){
 
-    if(nums[left] + nums[right]<m){
+    if(nums[left] + nums[right]<m){ //left + right 값이 m 보다 작다면 두 재료의 합계를 늘려주어야하기 때문에 left ++
       left++;
     }
-    else if(nums[left] + nums[right]>m){
+    else if(nums[left] + nums[right]>m){ // left + right 값이 m보다 크다면 두 재료의 합계를 줄여야하기 때문에 right --
       right--;
     }
-    else{
+    else{ // 만약 두 원소가 갑옷이 되는 m이 되었다면 left , right  다음 원소를 또 찾기 위해 둘다 값을 바꿔주어야한다  
       answer++;
       left++;
       right--;

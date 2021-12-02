@@ -23,8 +23,6 @@ function solution(n, primes) {
         pnums[j]++;
       }
     }
-
-    console.log(answer);
   }
 
   return answer[n - 1];

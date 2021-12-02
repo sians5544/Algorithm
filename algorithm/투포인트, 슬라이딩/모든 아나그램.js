@@ -37,32 +37,68 @@
 //   return answer;
 // }
 
-function solution(s,t){
-  let answer = 0,left = 0;
-  let hash = new Map();
-  let tlen = t.length;
+// function solution(s,t){
+//   let answer = 0,left = 0;
+//   let hash = new Map();
+//   let tlen = t.length;
 
-  for(let x of t){
-    hash.set(x,(hash.get(x)|| 0) -1);
-  }
+//   for(let x of t){
+//     hash.set(x,(hash.get(x)|| 0) -1);
+//   }
 
-  for(let i = 0; i<t.length-1; i++){
-    hash.set(s[i],(hash.get(s[i])|| 0 )+1);
-    if(hash.get(s[i]) === 0) hash.delete(s[i]); // 검사 다했으니까 삭제해 
-  }
+//   for(let i = 0; i<t.length-1; i++){
+//     hash.set(s[i],(hash.get(s[i])|| 0 )+1);
+//     if(hash.get(s[i]) === 0) hash.delete(s[i]); // 검사 다했으니까 삭제해 
+//   }
 
-  for(let right = tlen-1; right<s.length; right++ ){
+//   for(let right = tlen-1; right<s.length; right++ ){
     
-    hash.set(s[right], (hash.get(s[right]) || 0 )+1);
-    if(hash.get(s[right]) === 0)hash.delete(s[right]);
-    if(hash.size=== 0) answer++;
+//     hash.set(s[right], (hash.get(s[right]) || 0 )+1);
+//     if(hash.get(s[right]) === 0)hash.delete(s[right]);
+//     if(hash.size=== 0) answer++;
 
-    hash.set(s[left],(hash.get(s[left]) || 0) -1);
-    if(hash.get(s[left]) === 0 ) hash.delete(s[left]);
-    left++;
+//     hash.set(s[left],(hash.get(s[left]) || 0) -1);
+//     if(hash.get(s[left]) === 0 ) hash.delete(s[left]);
+//     left++;
 
+//   }
+//   return answer;
+// }
+
+function solution(s, t){
+
+  let answer = 0,left=0;
+  let len = t.length-1;
+
+  let hash = new Map();
+
+  // t를 hash에 세팅 
+  for(let x of t){
+    hash.set(x,(hash.get(x) || 0 ) -1);
   }
+
+
+
+  for(let i = 0; i< len; i++){
+    hash.set(s[i],(hash.get(s[i])|| 0) +1);
+    if(hash.get(s[i])===0) hash.delete(s[i]);
+  }
+
+  console.log(hash);
+
+  for(let right = len; right< s.length; right++){
+    hash.set(s[right],(hash.get(s[right]) || 0) +1);
+    if(hash.get(s[right]) === 0) hash.delete(s[right]);
+    if(hash.size=== 0)answer++;
+
+    hash.set(s[left],(hash.get(s[left])||0)-1);
+    if(hash.get(s[left]) === 0) hash.delete(s[left]);
+    left++;
+  }
+
   return answer;
 }
 
-console.log(solution("bacacbcba","abc"));
+
+console.log(solution("bacacbcba", "abc"));
+console.log(solution("bacaAacba","abc"));

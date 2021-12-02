@@ -1,20 +1,20 @@
-function solution(student){
+// function solution(student){
   
-  let stack = [];
+//   let stack = [];
 
-  let len = student.length;
-  let answer = new Array(5).fill(0);
+//   let len = student.length;
+//   let answer = new Array(5).fill(0);
 
-  for( let i = len -1 ; i >= 0 ; i++ ){
-    while(stack.length && student[i] > student[stack[stack.length-1]] ){ //stack[stack.length-1] 스택에 인덱스 번호를 넣어줬기 떄문에 이렇게 세팅 
-      // student[stack[stack.length-1]] 스택의 최상단의 인덱스를 가져와서 값 구하기
-      answer[stack[stack.length-1]] = i  +1;
-    }
+//   for( let i = len -1 ; i >= 0 ; i++ ){
+//     while(stack.length && student[i] > student[stack[stack.length-1]] ){ //stack[stack.length-1] 스택에 인덱스 번호를 넣어줬기 떄문에 이렇게 세팅 
+//       // student[stack[stack.length-1]] 스택의 최상단의 인덱스를 가져와서 값 구하기
+//       answer[stack[stack.length-1]] = i  +1;
+//     }
 
-    stack.push(i);
-  }
-  return answer;
-}
+//     stack.push(i);
+//   }
+//   return answer;
+// }
 
 
 // function solution(nums) {
@@ -44,19 +44,39 @@ function solution(student){
 
 
 
+// function solution(nums){
+//   let answer = Array(nums.length).fill(0);
+//   let stack = [];
+
+//   for(let i = nums.length -1 ; i >=0 ; i--){
+//     while(stack.length && nums[i] > nums[stack[stack.length-1]]){
+//       answer[stack.pop()] = i+1; // 더 큰 놈이 등장했기 때문에 더 작은 놈은 볼 필요도없음 버려 
+//     }
+//     stack.push(i); //
+//   }
+
+//   return answer;
+// }
+
 function solution(nums){
+ 
+
   let answer = Array(nums.length).fill(0);
-  let stack = [];
 
-  for(let i = nums.length -1 ; i >=0 ; i--){
+  let stack =[];
+
+  for(let i = nums.length-1; i>0; i++){
+
+    //stack에는 nums 의 인덱스 번호를 저장하겠다는 것 
     while(stack.length && nums[i] > nums[stack[stack.length-1]]){
-      answer[stack.pop()] = i+1; // 더 큰 놈이 등장했기 때문에 더 작은 놈은 볼 필요도없음 버려 
+      answer[stack.pop()] = i+1;
     }
-    stack.push(i); //
+    stack.push(i);
   }
-
+  
   return answer;
 }
+
 
 
 

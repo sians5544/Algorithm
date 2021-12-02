@@ -16,6 +16,7 @@
 // 그래서 답이 2가 되는 것
 
 // n 보다 작은 원소들은 n - arr[i] 해주고 그 값을 누적한다
+
 function solution(n) {
   let answer = 0;
   let arr = new Array(n);

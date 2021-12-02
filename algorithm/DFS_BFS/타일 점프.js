@@ -36,56 +36,99 @@
 // 배열의 맨 끝 오른쪽이 상점이다 
 
 
+// function solution(nums){
+
+//   let answer = 0;
+//   let queue = [];
+
+//   let checkbox = Array(nums.length).fill(0); 
+
+//   function BFS(){
+  
+//      // 현수가 서있는 위치
+//     queue.push(0);
+//     checkbox[0] = 1;
+
+//     let level = 0;
+
+//     while(queue.length){
+    
+//       let len = queue.length;
+      
+//       for(let i =0; i<len; i++){
+        
+//         let nx = queue.shift();
+//         //console.log(nx);
+
+//         for(let j = 1; j <=nums[nx]; j++){
+
+//           let move = nx + j;
+//           console.log(`${move} : ${nums[nx]}`);
+//           if(move === nums.length-1) return level +1;
+
+//           if(move > 0 && move <nums.length && checkbox[move] === 0){
+//             queue.push(move);
+//             checkbox[move] = 1;
+//           }
+//         }
+        
+//         console.log(`${nx} : ${queue}`);
+
+//       }
+
+//       level++;
+//     }
+
+//   }
+
+//   answer = BFS();
+
+//   if(answer === undefined){
+//     return -1;
+//   }
+
+//   return answer;
+// }
+
+
 function solution(nums){
 
   let answer = 0;
-  let queue = [];
-
-  let checkbox = Array(nums.length).fill(0); 
-
-  function BFS(){
+  let check = Array(nums.length-1).fill(0);
   
-     // 현수가 서있는 위치
+  function BFS(){
+    let queue = [];
     queue.push(0);
-    checkbox[0] = 1;
-
+    check[0]=1;
     let level = 0;
 
     while(queue.length){
-    
+
       let len = queue.length;
-      
-      for(let i =0; i<len; i++){
-        
+
+      for(let i = 0; i<len; i++){
         let nx = queue.shift();
-        //console.log(nx);
+        
+        for(let j=nums[nx]; j>0;j--){
+          
+          let index = nx + j;
+          
+          if(index === nums.length-1) return level+1;
 
-        for(let j = 1; j <=nums[nx]; j++){
-
-          let move = nx + j;
-          console.log(`${move} : ${nums[nx]}`);
-          if(move === nums.length-1) return level +1;
-
-          if(move > 0 && move <nums.length && checkbox[move] === 0){
-            queue.push(move);
-            checkbox[move] = 1;
+          if(index<=nums.length-1 && check[index] === 0){
+            queue.push(index);
+            check[index] = 1;
           }
         }
-        
-        console.log(`${nx} : ${queue}`);
-
       }
-
       level++;
     }
-
   }
+
 
   answer = BFS();
 
-  if(answer === undefined){
-    return -1;
-  }
+  if(answer === undefined) return -1;
 
   return answer;
 }
