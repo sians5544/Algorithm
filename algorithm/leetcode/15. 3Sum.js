@@ -32,3 +32,5 @@ function solution(nums) {
   return answer;
 }
 console.log(solution([0, 0, 0, 0]));
+
+Number.MAX_SAFE_INTEGER

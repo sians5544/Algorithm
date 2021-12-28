@@ -176,6 +176,7 @@ function solution6(n){
   let sum = 0;
   let answer = 0;
   let nums = new Array(len).fill(len).map((v,i) => i+1);
+  
 
   for(let right = 0 ; right < nums.length ; right++ ){
     sum[right]+= nums[right];

@@ -1,8 +1,6 @@
 //테스트 케이스 2개밖에 통과 못함
 
 function solution(priorities, location) {
-  let answer = [];
-  let stack = [];
   let count = 0;
 
   const new_list = priorities.map((priority, index) => {

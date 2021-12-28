@@ -20,3 +20,48 @@ function solution(nums) {
 
   return answer;
 }
+
+function solution2(nums) {
+  let answer = [];
+  let countArray = [...nums];
+  let len = nums.length;
+
+  countArray.sort((a, b) => a - b);
+
+  let left = 0;
+  let right = countArray[len - 1];
+
+  function count(target) {
+    let low = 0;
+    let high = len - 1;
+    let count = 0;
+
+    console.log(target);
+    while (low <= high) {
+      let mid = parseInt((low + high) / 2);
+
+      if (nums[mid] === target) {
+        count = mid;
+        console.log(mid);
+        low = mid + 1;
+      } else if (target < nums[mid]) {
+        high = mid - 1;
+      } else {
+        low = mid + 1;
+      }
+    }
+
+    return count;
+  }
+
+  for (let i = 0; i < len; i++) {
+    let seq = count(nums[i]);
+    console.log();
+    answer.push(seq);
+    countArray.splice(seq, 1);
+  }
+
+  return answer;
+}
+
+console.log(solution2([5, 2, 6, 1]));

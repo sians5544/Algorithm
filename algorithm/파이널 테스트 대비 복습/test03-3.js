@@ -35,7 +35,7 @@ function solution(nums, k) {
   let answer = 0;
   let sum = 0;
   nums.sort((a, b) => a - b);
-  console.log(nums);
+  console.log(nums);0
   let len = parseInt((nums.length - 1) / 2);
 
   console.log(len);
