@@ -17,8 +17,6 @@ function solution(genres, plays) {
     hash.set(genres[i], hashArr);
   }
 
-  // firstMusic.slice(0, 2);
-
   while (maxMusic.length > 0) {
     let firstMusic = [...hash.get(maxMusic[0][0])].sort((a, b) =>
       a[1] === b[1] ? a[0] - b[0] : b[1] - a[1]
@@ -27,12 +25,6 @@ function solution(genres, plays) {
     maxMusic.shift();
   }
 
-  let hasgValue = [...hash.values()];
-
-  // for (let hg of hasgValue) {
-  //   hg.sort((a, b) => (a[1] === b[1] ? a[0] - b[0] : b[1] - a[1]));
-  //   answer.push();
-  // }
   return answer;
 }
 
