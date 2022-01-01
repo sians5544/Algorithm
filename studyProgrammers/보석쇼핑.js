@@ -1,10 +1,8 @@
 function solution(gems) {
-  var answer = [];
-  let setJewerly = new Set(gems);
-
-  console.log(setJewerly); // set.size 보다 커지면...? left =
-  console.log(setJewerly.size);
+  let answer = [];
   let left = 0;
+
+  let setJewerly = new Set(gems);
   let hash = new Map();
 
   for (let right = 0; right < gems.length; right++) {
