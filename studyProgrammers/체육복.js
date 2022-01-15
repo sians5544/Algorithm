@@ -6,24 +6,35 @@
 function solution(n, lost, reserve) {
   let answer = 0;
 
-  let allstudent = [...lost, ...reserve];
+  let student = Array(n).fill(1);
 
-  lost.sort((a, b) => a - b);
-  reserve.sort((a, b) => a - b);
+  for (let lostStudent of lost) {
+    student[lostStudent - 1]--;
+  }
 
-  answer = n;
+  for (let reserveStudent of reserve) {
+    student[reserveStudent - 1]++;
+  }
 
-  while (lost.length) {
-    const target = lost.shift();
+  for (let i = 0; i < student.length; i++) {
+    if (student[i] === 0) {
+      if (student[i - 1] === 2) {
+        student[i - 1]--;
+        student[i]++;
+      } else if (student[i + 1] === 2) {
+        student[i + 1]--;
+        student[i]++;
+      }
+    }
+  }
 
-    const num = reserve.filter((student) => student - 1 || student + 1);
-
-    console.log(num);
-
-    if (num.length === 0) answer--;
+  for (let s of student) {
+    if (s !== 0) answer++;
   }
 
   return answer;
 }
 
 console.log(solution(5, [2, 4], [1, 3, 5]));
+console.log(solution(5, [2, 4], [3]));
+console.log(solution(3, [3], [1]));
