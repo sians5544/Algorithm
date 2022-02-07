@@ -12,9 +12,6 @@ for (let i = 1; i < input.length; i++) {
   nodes.push(input[i].trim().split(' ').map(Number));
 }
 
-nodes.sort((a, b) => a[1] - b[1]);
-console.log(nodes);
-
 let graph = Array.from(Array(n + 1), () => Array().fill(0));
 let check = Array(n + 1).fill(0);
 let answer = '';
@@ -24,18 +21,16 @@ for (let [a, b] of nodes) {
   graph[b].push(a);
 }
 
-console.log(graph);
+graph.map((item) => {
+  item.sort((a, b) => a - b);
+});
 
 let DFS = (vertex) => {
-  console.log(check);
-  if (graph[vertex].length <= 0) return;
-  else {
-    for (let i = 0; i < graph[vertex].length; i++) {
-      if (check[graph[vertex][i]] === 0) {
-        answer += graph[vertex][i] + ' ';
-        DFS(graph[vertex][i]);
-        check[graph[vertex][i]] = 1;
-      }
+  for (let i = 0; i < graph[vertex].length; i++) {
+    if (check[graph[vertex][i]] === 0) {
+      answer += graph[vertex][i] + ' ';
+      check[graph[vertex][i]] = 1;
+      DFS(graph[vertex][i]);
     }
   }
 };
