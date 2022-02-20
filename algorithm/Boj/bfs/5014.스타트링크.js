@@ -10,7 +10,6 @@ let L = 0;
 
 let check = Array(1e7).fill(0);
 
-// queue 를 가르키는 포인터의 역할
 let head = 0;
 let queue = [];
 

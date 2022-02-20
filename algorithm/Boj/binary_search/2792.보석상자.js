@@ -12,12 +12,9 @@ for (let i = 1; i < input.length; i++) {
   jewelry.push(+input[i]);
 }
 
-jewelry.sort((a, b) => a - b);
+let left = 1;
+let right = 1e10;
 
-let left = 0;
-let right = jewelry[jewelry.length - 1];
-let maxNum = jewelry[jewelry.length - 1];
-let answer = Number.MAX_SAFE_INTEGER;
 let mid = 0;
 
 let countStudent = (mid) => {
@@ -26,7 +23,7 @@ let countStudent = (mid) => {
   for (jew of jewelry) {
     if (jew >= mid) {
       cnt += Math.floor(jew / mid);
-      if (Math.floor(jew % mid) > 0) cnt += 1;
+      if (Math.floor(jew % mid) !== 0) cnt += 1;
     }
   }
 

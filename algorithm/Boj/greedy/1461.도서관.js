@@ -21,12 +21,12 @@ for (let t of tmp) {
 positive_arr.sort((a, b) => b - a);
 nagative_arr.sort((a, b) => b - a);
 
-for (let i = 0; i < positive_arr.length; ) {
+for (let i = 0; i < positive_arr.length;) {
   total += positive_arr[i] * 2;
   i += m;
 }
 
-for (let k = 0; k < nagative_arr.length; ) {
+for (let k = 0; k < nagative_arr.length;) {
   total += nagative_arr[k] * 2;
   k += m;
 }

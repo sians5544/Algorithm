@@ -34,7 +34,9 @@ for (let i = 0; i < m; i++) {
 }
 
 if (zerocnt === 0) return console.log(answer);
+
 let head = 0;
+
 while (stack.length > head) {
   let len = stack.length - head;
   let flag = false;

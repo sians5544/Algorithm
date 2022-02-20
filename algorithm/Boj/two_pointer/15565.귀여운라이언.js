@@ -26,6 +26,7 @@ for (let right = 0; right < nums.length; right++) {
     if (nums[left] === 1) {
       cnt--;
     }
+    
     left++;
   }
 }

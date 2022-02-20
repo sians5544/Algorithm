@@ -21,7 +21,7 @@ for (let [a, b] of nodes) {
   graph[b].push(a);
 }
 
-graph.map((item) => {
+graph.forEach((item) => {
   item.sort((a, b) => a - b);
 });
 
