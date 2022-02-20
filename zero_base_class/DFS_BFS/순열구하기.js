@@ -1,16 +1,16 @@
-// // function solution(nums, m){         
+// // function solution(nums, m){
 // //   let answer=[];
 // //   n=nums.length;
 // //   let ch=Array.from({length:n}, ()=>0);
 // //   let tmp=[];
 // //   function DFS(L){
 // //       if(L===m){
-// //           answer.push(tmp.slice()); 
+// //           answer.push(tmp.slice());
 // //       }
 // //       else{
 // //           for(let i=0; i<n; i++){
 // //               if(ch[i]===0){
-// //                   ch[i]=1;  // 체크 안된것만 사용하기 위해서 순열이라 
+// //                   ch[i]=1;  // 체크 안된것만 사용하기 위해서 순열이라
 // //                   tmp.push(nums[i]);
 // //                   DFS(L+1);
 // //                   ch[i]=0; // 체크를 풀어줘야함
@@ -24,7 +24,6 @@
 // // }
 
 // //console.log(solution([3, 6, 9], 2));
-
 
 // function solution(nums, m) {
 // 	let answer = [];
@@ -74,20 +73,17 @@
 // 	return answer;
 // }
 
-
-
-
 // function solution(nums,m){
 
 // 	let answer = [];
-	
-// 	let tmp = [] ; // 순열을 뽑아서 담을 변수 
+
+// 	let tmp = [] ; // 순열을 뽑아서 담을 변수
 // 	let check = Array(nums.length).fill(0); // 체크 되는 부분을 확인 함 이미 쓰인 항목이라면 1, 아니라면 0 으로 세팅
 
 // 	function DFS(L){
 
 // 		if(L === m ){
-// 			return answer.push(tmp.slice()); // 얕은 복사 처리 
+// 			return answer.push(tmp.slice()); // 얕은 복사 처리
 // 		}else{
 // 			for(let i = 0; i<nums.length; i++){
 // 				if(check[i] == 0){
@@ -99,43 +95,42 @@
 // 				}
 // 			}
 // 		}
-// 	} 
+// 	}
 
 // 	DFS(0);
 //   return answer;
 
 // }
 
-
 // 순열  : N 개의 항목에서 R개를 선택할 때 순서를 가지면서 나열하는 방법이다 (중복 x)
-// 순서 체크를 위해서 check 배열이 필요함 
-
+// 순서 체크를 위해서 check 배열이 필요함
 
 //순열 : N개의 항목에서 R 개를 선택할 때 순서를 가지면서 나열하는 방법 , (중복 x)
-// 중복이  안되기 떄문에 check 배열을 사용해야함 
+// 중복이  안되기 떄문에 check 배열을 사용해야함
 
-function solution(nums,m){
-	let answer = [];
-	let tmp = [];
-	let check = Array(nums.length).fill(0);
+function solution(nums, m) {
+  let answer = [];
+  let tmp = [];
+  let check = Array(nums.length).fill(0);
 
-	function DFS(v){
-		if(v === m){
-			return answer.push(tmp.slice());
-		}else{
-			for(let i = 0; i<nums.length; i++){
-				if(check[i]==0){
-					check[i]=1;
-					tmp.push(nums[i]);
-					DFS(v+1)
-					tmp.pop();
-					check[i]=0;
-				}
-			}
-		}
-	}
+  function DFS(v) {
+    if (v === m) {
+      return answer.push(tmp.slice());
+    } else {
+      for (let i = 0; i < nums.length; i++) {
+        if (check[i] == 0) {
+          check[i] = 1;
+          tmp.push(nums[i]);
+          DFS(v + 1);
+          tmp.pop();
+          check[i] = 0;
+        }
+      }
+    }
+  }
 
-	DFS(0);
-	return answer;
+  DFS(0);
+  // return Math.abs(answer[answer.length - 1] - answer[answer.length - 2]);
+  return answer;
 }
-console.log(solution([3, 6, 9], 2)); // [[3, 6], [3, 9], [6, 3], [6, 9], [9, 3], [9, 6]]
+console.log(solution([1, 2, 3, 4, 5, 6, 7, 8, 9], 3)); // [[3, 6], [3, 9], [6, 3], [6, 9], [9, 3], [9, 6]]
