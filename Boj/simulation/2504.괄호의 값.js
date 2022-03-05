@@ -19,16 +19,17 @@ for (let i = 0; i < strs.length; i++) {
     stack.push('(');
   } else if (strs[i] === ')') {
     if (strs[i - 1] === '(') answer += tmp;
+    if (stack[stack.length - 1] === '[' || !stack.length) return console.log(0);
     if (stack[stack.length - 1] === '(') {
       stack.pop();
     }
     tmp = tmp / 2;
   } else if (strs[i] === '[') {
-    console.log('tmp3', tmp, answer);
     tmp *= 3;
     stack.push('[');
   } else {
     if (strs[i - 1] === '[') answer += tmp;
+    if (stack[stack.length - 1] === '(' || !stack.length) return console.log(0);
     if (stack[stack.length - 1] === '[') {
       stack.pop();
     }
