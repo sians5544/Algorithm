@@ -8,14 +8,12 @@ let input = fs.readFileSync(filePath).toString().trim().split('\n');
 let [n, m] = input[0].split(' ').map(Number);
 
 let board = Array(n);
-let answer = [];
+let answer = Number.MAX_SAFE_INTEGER;
 let arrhouse = [];
 let arrChiken = [];
 for (let i = 1; i < input.length; i++) {
   board[i - 1] = input[i].trim().split(' ').map(Number);
 }
-
-let check = Array(arrChiken.length).fill(0);
 
 for (let i = 0; i < n; i++) {
   for (let j = 0; j < n; j++) {
@@ -28,37 +26,34 @@ for (let i = 0; i < n; i++) {
   }
 }
 
-const checkCount = (idx) => {
+let check = [];
+
+const checkCount = () => {
   let sum = 0;
-  console.log(idx);
-  let cnt = Number.MAX_SAFE_INTEGER;
-  let r = 0;
-  let c = 0;
-  let [x, y] = arrChiken[idx];
-  for (let arr of arrChiken) {
-    r = Math.abs(x - arr[0]);
-    c = Math.abs(y - arr[1]);
-    cnt = Math.min(r + c, cnt);
+
+  for (let chk of arrhouse) {
+    let cnt = Number.MAX_SAFE_INTEGER;
+
+    for (let arr of check) {
+      let r = Math.abs(chk[0] - arr[0]);
+      let c = Math.abs(chk[1] - arr[1]);
+      cnt = Math.min(cnt, r + c);
+    }
     sum += cnt;
   }
-  console.log(sum);
+
   return sum;
 };
-let tmp = [];
 
 function DFS(idx, cnt) {
   if (cnt === m) {
-    answer.push(tmp.slice());
+    answer = Math.min(answer, checkCount());
+    return;
   } else {
     for (let i = idx; i < arrChiken.length; i++) {
-      if (check[i] === 0) {
-        check[i] = 1;
-        console.log(checkCount(i));
-        tmp.push(checkCount(i));
-        DFS(i, cnt + 1);
-        tmp.pop();
-        check[i] = 0;
-      }
+      check.push(arrChiken[i]);
+      DFS(i + 1, cnt + 1);
+      check.pop();
     }
   }
 }
