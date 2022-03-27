@@ -13,60 +13,32 @@ for (let i = 1; i < input.length; i++) {
   strs.push(input[i].trim());
 }
 
-const palindrome = (str) => {
-  let answer = false;
-  let right = str.length - 1;
-  let left = 0;
+const palindrome = (str, l, r, temp) => {
+  let answer = true;
+  let right = r;
+  let left = l;
+  let answerleft = false;
+  let answerRight = false;
 
-  while (left < right) {
+  while (left <= right) {
     if (str[left] === str[right]) {
       left++;
       right--;
     } else {
-      //왼쪽 당겨서 회문인지 확인
-      if (str[left + 1] === str[right] || str[left] === str[right - 1]) {
-        let numleft = left;
-        let numright = right;
-
-        if (str[numleft + 1] === str[numright]) {
-          numleft++;
-          while (numleft < numleft && answer === true) {
-            if (str[numleft] === str[rnumrightight]) {
-              numleft++;
-              numright--;
-            } else {
-              answer = false;
-            }
-          }
-        }
-
-        if (answer) break;
-        numleft = left;
-        numright = right;
-
-        if (str[numleft] === str[numright - 1]) {
-          answer = true;
-          numright--;
-          while (numleft < numleft && answer === true) {
-            if (str[numleft] === str[rnumrightight]) {
-              numleft++;
-              numright--;
-            } else {
-              answer = false;
-            }
-          }
-        }
-
-        left = numleft;
-        right = numright;
-      } else {
+      if (temp === 0) {
         answer = false;
+        answerleft = palindrome(str, left + 1, right, 1);
+        answerRight = palindrome(str, left, right - 1, 1);
         break;
+      } else {
+        return false;
       }
     }
   }
+  if (answer) return true;
 
-  return answer;
+  if (answerleft || answerRight) return true;
+  else return false;
 };
 
 for (let str of strs) {
@@ -75,7 +47,7 @@ for (let str of strs) {
       answer.push(0);
       continue;
     }
-    if (palindrome(str)) {
+    if (palindrome(str, 0, str.length - 1, 0)) {
       answer.push(1);
       continue;
     } else {
