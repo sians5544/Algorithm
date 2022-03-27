@@ -35,7 +35,7 @@ while (left <= right) {
   // 구간 조절
   mid = parseInt(left + right / 2);
 
-  if (countBomb(mid) <= answer) {
+  if (countBomb(mid) < answer) {
     answer = countBomb(mid);
     mid2 = Math.max(mid2, mid);
     right = mid - 1;

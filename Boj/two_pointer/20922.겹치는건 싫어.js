@@ -9,7 +9,7 @@ let nums = input[1].split(' ').map(Number);
 
 let cntArray = Array(100001).fill(0);
 
-let answer = 0;
+let answer = 0; 
 
 let left = 0;
 

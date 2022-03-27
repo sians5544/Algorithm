@@ -84,6 +84,7 @@ const chage = () => {
     icebergCopy[i] = [...iceberg[i]];
   }
 };
+
 while (totalisland > 0) {
   if (islandCount() > 1) return console.log(0);
   board = Array.from(Array(N), () => Array(M).fill(0));

@@ -7,7 +7,7 @@ let [n, m] = input[0].split(' ').map(Number);
 
 let nums = [];
 
-let answer = Number.MAX_SAFE_INTEGER;
+// let answer = Number.MAX_SAFE_INTEGER;
 
 for (let i = 1; i < input.length; i++) {
   nums.push(input[i].trim().split(' ').map(Number));
@@ -21,14 +21,15 @@ for (let [a, b] of nums) {
 }
 
 // 각 노드의 합계를 구하기
+let finallyArr = Array(n + 1).fill(0);
 
 let BFS = (num) => {
-  let L = 0;
+  let L = 1;
   let queue = [];
+  let total = 0;
 
   //중복 체크를 위한 배열
   let dupliArr = Array(n + 1).fill(0);
-  let total = 0;
 
   queue.push(num);
   dupliArr[num] = 1;
@@ -38,7 +39,7 @@ let BFS = (num) => {
     for (let i = 0; i < len; i++) {
       let que = queue.shift();
       for (let j = 1; j < checkarr.length; j++) {
-        if (checkarr[que][j] === 1 && dupliArr[j] === 0) {
+        if (checkarr[que][j] === 1 && checkarr[que][j] === 1 && dupliArr[j] === 0) {
           total += L;
           queue.push(j);
           dupliArr[j] = 1;
@@ -47,11 +48,22 @@ let BFS = (num) => {
     }
     L++;
   }
-  return L;
+
+  return total;
 };
 
+let answer = Number.MAX_SAFE_INTEGER;
+let answerindex = -1;
+
 for (let i = 1; i < n + 1; i++) {
-  answer = Math.min(BFS(i), answer);
+  finallyArr[i] = BFS(i);
 }
 
-console.log(answer);
+finallyArr.forEach((item, index) => {
+  if (item !== 0 && item < answer) {
+    answer = item;
+    answerindex = index;
+  }
+});
+
+console.log(answerindex);
