@@ -1,63 +1,40 @@
 function solution(s) {
-  let answer = s.length;
-  let dfsResultArray = [];
-  let first = '';
-  let tmp = [];
+  let len = s.length;
+  let answer = Number.MAX_SAFE_INTEGER;
+  let str = '';
 
-  if (answer === 1) return 1;
-  const checkLenStr = (results) => {
-    let copyStr = s;
-
-    // console.log(results);
-    // let check = Array(results.length).fill(0);
-
-    for (let j = 0; j < results.length; j++) {
-      let check = false;
-      let len = results[j].length;
-      for (let i = 0; i < copyStr.length; i += len) {
-        console.log(results[j], copyStr.slice(i, i + len), i, i + len);
-        if (copyStr.slice(i, i + len) === results[j]) {
-          let cnt = 1;
-          let left = i + len;
-          while (left <= copyStr.length - len) {
-            if (copyStr.slice(left, left + len) === results[j]) {
-              cnt++;
-              left += len;
-            } else break;
-          }
-          if (cnt > 1) {
-            let startStr = '';
-            if (i > 0) {
-              startStr = copyStr.slice(0, i);
-            }
-
-            copyStr = startStr + cnt + results[j] + copyStr.slice(left, copyStr.length);
-            console.log('여기 맞니?', left, copyStr);
-            i = left + 1;
-          }
+  if (s.length === 1) return 1;
+  for (let i = 1; i <= parseInt(len / 2); i++) {
+    let str = '';
+    let preStr = s.substring(0, i);
+    let cnt = 1;
+    for (let j = i; j < len; j += i) {
+      let tmpStr = s.substring(j, j + i);
+      if (preStr === tmpStr) {
+        cnt++;
+      } else {
+        if (cnt === 1) {
+          str = str + preStr;
+        } else {
+          str = str + cnt + preStr;
         }
-        console.log(copyStr);
-        answer = Math.min(answer, copyStr.length);
+
+        cnt = 1;
       }
+      preStr = tmpStr;
     }
-  };
 
-  for (let i = 6; i <= 6; i++) {
-    dfsResultArray = [];
-
-    for (let j = 0; j < s.length - i; j += i) {
-      dfsResultArray.push(s.slice(j, j + i));
-    }
-    console.log(dfsResultArray);
-    checkLenStr(dfsResultArray);
+    if (cnt === 1) str = str + preStr;
+    else str = str + cnt + preStr;
+    answer = Math.min(answer, str.length);
   }
 
   return answer;
 }
 // console.log(solution('aabbaccc'));
-// console.log(solution('ababcdcdababcdcd'));
+console.log(solution('ababcdcdababcdcd'));
 // console.log(solution('abcabcdede'));
-console.log(solution('abcabcabcabcdededededede'));
+// console.log(solution('abcabcabcabcdededededede'));
 // console.log(solution('xababcdcdababcdcd'));
-// console.log(solution('aaaaa'));
-// console.log(solution('aaz'));
+console.log(solution('aaaaa'));
+console.log(solution('a'));
