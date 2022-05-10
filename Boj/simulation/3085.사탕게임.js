@@ -6,10 +6,7 @@ let input = fs.readFileSync(filePath).toString().trim().split('\n');
 
 let N = +input[0];
 let board = [];
-let answer = 0;
 let maxCnt = 0;
-let colors = ['C', 'P', 'Z', 'Y'];
-let checks = Array(colors.length).fill(0);
 
 //1. 처음에 사탕을 채웠을 때 최대 값으로 연속된 사탕의 개수를 알아낸다
 // 2. 이번 칸과 다음 칸의 사탕색이 다르면 둘의 위치를 바꿔서 연속된 개수 세어준다
