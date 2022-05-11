@@ -1,4 +1,5 @@
-function solution(tickets) {
+//BFS 로 풀이
+function solution1(tickets) {
   let answer = [];
   let queue = [];
   let check = [];
@@ -37,24 +38,48 @@ function solution(tickets) {
 
   return answer;
 }
+// DFS 로 풀이
+function solution(tickets) {
+  let answer = [];
+  tickets.sort((a, b) => (a[1] < b[1] ? -1 : a[1] < b[1] ? 1 : 0));
 
-// console.log(
-//   solution([
-//     ['ICN', 'JFK'],
-//     ['HND', 'IAD'],
-//     ['JFK', 'HND'],
-//   ])
-// );
-// console.log(
-//   solution([
-//     ['ICN', 'SFO'],
-//     ['ICN', 'ATL'],
-//     ['SFO', 'ATL'],
-//     ['ATL', 'ICN'],
-//     ['ATL', 'SFO'],
-//   ])
-// );
+  const DFS = (L, arr, visited) => {
+    if (L === tickets.length) {
+      answer.push(arr.slice());
+    } else {
+      for (let i = 0; i < tickets.length; i++) {
+        if (visited.includes(i)) continue;
+        if (tickets[i][0] === arr[arr.length - 1]) {
+          visited.push(i);
+          arr.push(tickets[i][1]);
+          DFS(L + 1, arr, visited);
+          visited.pop();
+          arr.pop();
+        }
+      }
+    }
+  };
 
+  DFS(0, ['ICN'], []);
+  answer.sort();
+  return answer[0];
+}
+console.log(
+  solution([
+    ['ICN', 'JFK'],
+    ['HND', 'IAD'],
+    ['JFK', 'HND'],
+  ])
+);
+console.log(
+  solution([
+    ['ICN', 'SFO'],
+    ['ICN', 'ATL'],
+    ['SFO', 'ATL'],
+    ['ATL', 'ICN'],
+    ['ATL', 'SFO'],
+  ])
+);
 console.log(
   solution([
     ['ICN', 'AOO'],
