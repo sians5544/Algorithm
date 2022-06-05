@@ -3,7 +3,8 @@ function solution(board) {
   let N = board.length;
   let checkBoard = [];
   let queue = [];
-
+  let dp = Array.from(Array(N), () => Array.from(Array(N), () => Array(4).fill(0)));
+  console.log(N);
   let dx = [0, -1, 0, 1];
   let dy = [-1, 0, 1, 0];
 
@@ -15,70 +16,68 @@ function solution(board) {
   };
 
   const BFS = () => {
-    let total = 100;
-
     while (queue.length) {
       let len = queue.length;
 
       for (let i = 0; i < len; i++) {
         let [x, y, z] = queue.shift();
 
-        if (x === N - 1 && y === N - 1) return (total += 100);
+        z = z % 2;
 
-        let sx = x + dx[z];
-        let sy = y + dy[z];
+        if (x === N - 1 && y === N - 1) return;
 
-        console.log(x, y);
-        if (sx >= 0 && sy >= 0 && sx < N && sy < N && checkBoard[sx][sy] === 0) {
-          checkBoard[sx][sy] = 1;
-          queue.push([sx, sy, z]);
-          total += 100;
-        } else {
-          for (let k = 0; k < 4; k++) {
-            if (k === z) continue;
+        for (let k = 0; k < 4; k++) {
+          let nx = x + dx[k];
+          let ny = y + dy[k];
 
-            let nx = x + dx[k];
-            let ny = y + dy[k];
-
-            if (nx >= 0 && ny >= 0 && nx < N && ny < N && checkBoard[nx][nx] === 0) {
-              checkBoard[nx][ny] = 1;
-              queue.push([nx, ny, k]);
-              total += 500;
-            }
+          if (
+            nx >= 0 &&
+            ny >= 0 &&
+            nx < N &&
+            ny < N &&
+            dp[nx][ny][k] === 0 &&
+            board[nx][ny] === 0
+          ) {
+            if (z === 1 && k % 2 === 1) dp[nx][ny][k] = dp[x][y][z] + 100;
+            else dp[nx][ny][k] = dp[x][y][z] + 500;
+            queue.push([nx, ny, k]);
           }
         }
       }
     }
-
-    return total;
   };
 
   for (let k = 0; k < 4; k++) {
     originBoard();
-    checkBoard[0][0] = 1;
+    dp = Array.from(Array(N), () => Array.from(Array(N), () => Array(4).fill(0)));
+    dp[0][0][k] = 100;
     let nx = 0 + dx[k];
     let ny = 0 + dy[k];
 
-    if (nx >= 0 && ny >= 0 && nx < N && ny < N && checkBoard[nx][ny] === 0) {
+    if (nx >= 0 && ny >= 0 && nx < N && ny < N && board[nx][ny] === 0) {
+      dp[nx][ny][k] = dp[0][0][k] + 100;
       queue = [[nx, ny, k]];
-      answer = Math.min(answer, BFS());
+      BFS();
+      console.log(dp);
     }
   }
   return answer;
 }
 
-// console.log(
-//   solution([
-//     [0, 0, 0],
-//     [0, 0, 0],
-//     [0, 0, 0],
-//   ])
-// );
 console.log(
   solution([
-    [0, 0, 1, 0],
-    [0, 0, 0, 0],
-    [0, 1, 0, 1],
-    [1, 0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0],
+  ])
+);
+console.log(
+  solution([
+    [0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 0],
+    [0, 0, 1, 0, 0, 0],
+    [1, 0, 0, 1, 0, 1],
+    [0, 1, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0, 0],
   ])
 );
