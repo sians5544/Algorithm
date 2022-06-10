@@ -10,10 +10,8 @@
 ### 🔗 출제 사이트 별 폴더
 
 <hr>
-<a href ='https://github.com/sians5544/Algorithm/tree/main/Boj'>백준 풀이 폴더</a>
 
-<a href ='https://github.com/sians5544/Algorithm/tree/main/studyProgrammers'>프로그래머스 풀이 폴더</a>
-
-<a href ='https://github.com/sians5544/Algorithm/tree/main/leetcode'>leetcode 풀이 폴더</a>
-
-<a href ='https://github.com/sians5544/Algorithm/tree/main/zero_base_class'>zerobase 스터티 풀이 폴더</a>
+- <a href ='https://github.com/sians5544/Algorithm/tree/main/Boj'>백준 풀이 폴더</a>
+- <a href ='https://github.com/sians5544/Algorithm/tree/main/studyProgrammers'>프로그래머스 풀이 폴더</a>
+- <a href ='https://github.com/sians5544/Algorithm/tree/main/leetcode'>leetcode 풀이 폴더</a>
+- <a href ='https://github.com/sians5544/Algorithm/tree/main/zero_base_class'>zerobase 스터티 풀이 폴더</a>
