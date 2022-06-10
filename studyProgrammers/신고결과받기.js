@@ -4,18 +4,21 @@ function solution(id_list, report, k) {
   let hash = {};
   let checkUsers = Array.from(Array(len), () => Array(len).fill(0));
   let countArrs = Array(len).fill(0);
+
   for (let i = 0; i < len; i++) {
     hash[id_list[i]] = i;
   }
 
   for (let j = 0; j < report.length; j++) {
     let [t, f] = report[j].split(' ');
-    checkUsers[hash[t]][hash[f]]++;
+    if (!checkUsers[hash[t]][hash[f]]) {
+      checkUsers[hash[t]][hash[f]] = 1;
+    }
   }
 
   for (let k = 0; k < len; k++) {
     for (let l = 0; l < len; l++) {
-      if (checkUsers[l][k] === 1) {
+      if (checkUsers[l][k] === 1) { 
         countArrs[k]++;
       }
     }

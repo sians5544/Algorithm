@@ -1,6 +1,5 @@
 function solution(s, n) {
   let answer = 0;
-  let cnt = 0;
   let map = {};
   const re = /[A-Z]/;
   let str = s.split(' ').join('');
@@ -12,7 +11,7 @@ function solution(s, n) {
     }
   }
 
-  return answer > -1 ? s.length : -1;
+  return n > -1 ? s.length : -1;
 }
 
 console.log(solution('time to time', 5));

@@ -108,7 +108,7 @@ function solution1(cards) {
   return answer;
 }
 
-function solution(cards) {
+function solution2(cards) {
   let answer = 0;
   let check = Array(cards.length).fill(0);
 
@@ -172,6 +172,73 @@ function solution(cards) {
   return answer;
 }
 
+// 내가 다시 풀어본 코드
+function solution(cards) {
+  let answer = 0;
+  let len = cards.length;
+  let check = Array(len).fill(0);
+  const isUniqueIndex = (idx, arr) => {
+    let cnt = 1;
+
+    for (let i = 0; i < arr.length; i++) {
+      if (idx !== i && arr[idx] === arr[i]) cnt++;
+    }
+
+    return cnt === 1;
+  };
+
+  const minNumIndex = (arr) => {
+    let num = Number.MAX_SAFE_INTEGER;
+    let color = 0;
+
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] < num) {
+        num = arr[i];
+        color = i;
+      }
+    }
+
+    return color;
+  };
+
+  for (let i = 0; i < len; i++) {
+    if (check[i] === 1) continue;
+    for (let j = 0; j < len; j++) {
+      if (i === j) continue;
+      if (check[j] === 1) continue;
+
+      let indexI = minNumIndex(cards[i]);
+      let indexJ = minNumIndex(cards[j]);
+
+      if (!cards[i][indexI] || !cards[j][indexJ] || indexI === indexJ) continue;
+
+      let chkArrI = cards[i].slice();
+      let chkArrJ = cards[j].slice();
+
+      chkArrI[indexJ]--;
+      chkArrJ[indexI]--;
+      chkArrI[indexI]++;
+      chkArrJ[indexJ]++;
+
+      if (
+        isUniqueIndex(indexI, chkArrI) &&
+        isUniqueIndex(indexJ, chkArrJ) &&
+        chkArrI[minNumIndex(chkArrI)] > cards[i][indexI] &&
+        chkArrJ[minNumIndex(chkArrJ)] > cards[j][indexJ]
+      ) {
+        check[i] = check[j] = 1;
+        cards[i] = chkArrI;
+        cards[j] = chkArrJ;
+      }
+    }
+  }
+
+  for (let k = 0; k < len; k++) {
+    answer += cards[k][minNumIndex(cards[k])];
+  }
+
+  return answer;
+}
 console.log(
   solution([
     [10, 5, 15],

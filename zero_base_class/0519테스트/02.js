@@ -1,9 +1,7 @@
-const { takeCoverage } = require('v8');
-
 function solution(M, remote_tasks, office_tasks, employees) {
   let answer = [];
-  let offisCheck = Array(M + 1).fill(0); // 사무실 출근자 카운트하기
-  let remoteEmployee = {}; // 리모트 하는 직원들을 가지고 있는 MAP
+  let offisCheck = Array(M + 1).fill(0);
+  let remoteEmployee = {};
   let remoteObj = {};
 
   remote_tasks.forEach((remote) => {
@@ -60,9 +58,18 @@ console.log(
 
 console.log(
   solution(
-    2,
-    ['design'],
-    ['building', 'supervise'],
-    ['2 design', '1 supervise building design', '1 design', '2 design']
+    3,
+    ['develoment', 'marketing', 'hometask'],
+    ['recruitment', 'education', 'officetask'],
+    [
+      '1 develoment hometask',
+      '1 recruitment marketing',
+      '2 hometask',
+      '2 develoment marketing hometask',
+      '3 marketing',
+      '3 officetask',
+      '3 develoment',
+      '3 marketing',
+    ]
   )
-);
+); // [1,4,5,7,8]

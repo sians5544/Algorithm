@@ -9,7 +9,7 @@ function solution(n, t, m, timetable) {
     let [min, second] = str.split(':').map(Number);
     return min * 60 + second;
   };
-
+ 
   for (let i = 0; i < n; i++) {
     busHash[busTime] = [];
     busTime += t;

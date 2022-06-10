@@ -72,3 +72,8 @@ console.log(
   solution(['frodo', 'fradi', 'crodo', 'abc123', 'frodoc'], ['fr*d*', '*rodo', '******', '******'])
 );
 console.log(solution(['fradi', 'frady'], ['frady', 'frad*']));
+
+
+array.forEach(element => {
+  tmp
+});

@@ -1,4 +1,4 @@
-function solution(prices, d, k) {
+function solution2(prices, d, k) {
   let answer = 0;
   let N = prices.length;
 
@@ -31,6 +31,38 @@ function solution(prices, d, k) {
   }
 
   return prices[parseInt((N - 1) / 2)];
+}
+
+// 내가 다시 푼 풀이방법
+function solution(prices, d, k) {
+  let len = prices.length;
+  prices.sort((a, b) => a - b);
+
+  const resultAvg = (prices, start, end) => {
+    let total = 0;
+
+    for (let i = start; i <= end; i++) {
+      total += prices[i];
+    }
+
+    return parseInt(total / (end - start + 1));
+  };
+
+  if (prices[len - 1] - prices[0] <= d) {
+    return resultAvg(prices, 0, len - 1);
+  }
+
+  if (prices[len - 2] - prices[1] <= d) {
+    return resultAvg(prices, 1, len - 2);
+  }
+
+  for (let i = 0; i < len; i++) {
+    if (prices[i + k - 1] - prices[i] <= d) {
+      return resultAvg(prices.slice(i, i + k), 0, k - 1);
+    }
+  }
+
+  return prices[parseInt((len - 1) / 2)];
 }
 
 console.log(solution([4, 5, 6, 7, 8], 4, 3));
