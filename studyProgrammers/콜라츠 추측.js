@@ -1,5 +1,5 @@
-function solution(num) {
-  let answer = 0;
+function checkCount(num) {
+  let answer = 1;
   let flag = false;
   const LOOP_CNT = 500;
 
@@ -17,3 +17,19 @@ function solution(num) {
 
   return flag ? answer : -1;
 }
+function solution(start, end) {
+  let answer = 0;
+  let max = Number.MIN_SAFE_INTEGER;
+
+  for (let i = start; i <= end; i++) {
+    let collatz = checkCount(i);
+    if (max < collatz) {
+      max = checkCount(i);
+      answer = i;
+    }
+  }
+
+  return { max: max, num: answer };
+}
+
+console.log(solution(1, 10));
