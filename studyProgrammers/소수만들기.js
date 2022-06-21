@@ -29,3 +29,20 @@ function solution(nums) {
 
   return answer;
 }
+let answer = 0;
+let num = 7;
+const DFS = (n, total) => {
+  if (n === num) {
+    answer = total * n;
+    return;
+  } else {
+    if (n === num || n % 2 === 1) {
+      DFS(n + 1, total * n);
+    } else {
+      DFS(n + 1, total);
+    }
+  }
+};
+
+DFS(0, 1);
+console.log(answer);
