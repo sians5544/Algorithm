@@ -1,17 +1,17 @@
 // 3개의 원소의 합이 0인 부분집합을 찾는 문제이므로 DFS 사용
 function solution(number) {
   let answer = 0;
-  let tmp = [];
+  let tmp = 0;
 
   function DFS(v, s) {
     if (v === 3) {
-      if (tmp.reduce((acc, cur) => acc + cur) === 0) answer += 1;
+      if (tmp === 0) answer += 1;
       return;
     } else {
       for (let i = s; i < number.length; i++) {
-        tmp.push(number[i]);
+        tmp +=number[i];
         DFS(v + 1, i + 1);
-        tmp.pop();
+        tmp-=number[i];
       }
     }
   }
