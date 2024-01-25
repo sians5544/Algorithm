@@ -1,35 +1,30 @@
-function checkMap(str){
-    let obj = {};
-    
-    for(let i = 0; i < str.length; i++){
-        
-        if(obj[str[i]]){
-            obj[str[i]]++;
-        }else{
-            obj[str[i]] = 1;
-        }
-    }
-    
-    return obj;
-}
-
 function solution(X, Y) {
-    let answer = '';
+    let answer = "";
+    let xObj = {};
+    let yObj = {};
+    let xSet = new Set(X.length > Y.length ? Y : X);
     let flag = false;
-    let pair = '';
-    
-    let xHash = checkMap(X);
-    let yHash = checkMap(Y);
-    
-    
-    for(let x in xHash){
-       if(yHash[x]){
-            flag = true;
-            pair+= x.repeat(Math.min(yHash[x],xHash[x]));
-       }
+  
+    for (let i = 0; i < Math.max(X.length, Y.length); i++) {
+      if (X[i]) {
+        xObj[X[i]] ? (xObj[X[i]] += 1) : (xObj[X[i]] = 1);
+      }
+  
+      if (Y[i]) {
+        yObj[Y[i]] ? (yObj[Y[i]] += 1) : (yObj[Y[i]] = 1);
+      }
     }
-    
-    answer = flag ? BigInt([...pair].sort((a,b)=> b - a).join('')).toString()  : "-1";
-    
-    return answer;
-}
+  
+    [...xSet]
+      .sort((a, b) => b - a)
+      .forEach((num) => {
+        if (xObj[num] && yObj[num]) {
+          flag = true;
+          answer += num.repeat(Math.min(xObj[num], yObj[num]));
+        }
+      });
+  
+    if (!flag) return "-1";
+  
+    return !Number(answer) ? "0" : answer;
+  }
